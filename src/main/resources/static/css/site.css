@@ -1,0 +1,147 @@
+/* Spoonful: warm restaurant palette. Change the colours here in one place. */
+:root {
+    --wine: #7a1f2b;
+    --wine-dark: #5c1620;
+    --gold: #c8963e;
+    --cream: #faf6f1;
+    --paper: #ffffff;
+    --ink: #2b2420;
+    --muted: #6f655d;
+    --line: #e7dfd6;
+    --radius: 10px;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; color: var(--ink); background: var(--cream); line-height: 1.55; display: flex; flex-direction: column; min-height: 100vh; }
+h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; line-height: 1.2; margin: 0 0 .6rem; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.35rem; margin-top: 2rem; }
+a { color: var(--wine); }
+main { width: 100%; max-width: 1080px; margin: 2rem auto; padding: 0 1.25rem; flex: 1; }
+main.narrow { max-width: 520px; }
+main.medium { max-width: 760px; }
+.muted { color: var(--muted); }
+.small { font-size: .875rem; }
+.nowrap { white-space: nowrap; }
+.optional { font-weight: 400; color: var(--muted); font-size: .8rem; }
+
+/* Navigation */
+.nav { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: space-between; align-items: center; padding: .8rem 1.5rem; background: var(--paper); border-bottom: 1px solid var(--line); }
+.brand { display: flex; align-items: center; gap: .5rem; font-family: Georgia, serif; font-size: 1.35rem; font-weight: 700; color: var(--wine); text-decoration: none; }
+.brand-mark { display: grid; place-items: center; width: 2rem; height: 2rem; border-radius: 50%; background: var(--wine); color: var(--cream); font-size: 1.05rem; }
+.links { display: flex; flex-wrap: wrap; align-items: center; gap: 1.1rem; }
+.links a, .link-button { color: var(--ink); text-decoration: none; font-size: .95rem; }
+.links a:hover, .link-button:hover { color: var(--wine); }
+.links a.nav-cta { background: var(--wine); color: #fff; padding: .4rem .9rem; border-radius: 999px; }
+.link-button { background: none; border: 0; padding: 0; font: inherit; cursor: pointer; }
+form.inline { display: inline; margin: 0; }
+
+/* Hero and search */
+.hero { background: linear-gradient(135deg, var(--wine-dark), var(--wine) 60%, #9b3b2f); color: var(--cream); padding: 3.5rem 0; }
+.hero-inner { max-width: 1080px; margin: 0 auto; padding: 0 1.25rem; }
+.hero h1 { font-size: 2.6rem; }
+.hero p { font-size: 1.1rem; opacity: .9; margin: 0 0 1.5rem; }
+.search { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; background: var(--paper); padding: .5rem; border-radius: 999px; max-width: 760px; }
+.search input { flex: 1 1 240px; width: auto; min-width: 0; border: 0; border-radius: 999px; }
+.search select { flex: 0 1 190px; width: auto; border: 0; border-radius: 999px; background: var(--cream); }
+.search button { border-radius: 999px; padding-inline: 1.5rem; }
+.section-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .5rem; }
+.section-head h2 { margin-top: 0; }
+
+/* Restaurant cards */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25rem; }
+.restaurant-card { display: flex; flex-direction: column; background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; text-decoration: none; color: inherit; transition: transform .15s, box-shadow .15s; }
+.restaurant-card:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(43, 36, 32, .12); }
+.card-banner { position: relative; height: 120px; display: flex; align-items: flex-end; justify-content: space-between; padding: .75rem 1rem; color: #fff; }
+.banner-initial { font-family: Georgia, serif; font-size: 3.2rem; line-height: 1; opacity: .35; }
+.banner-cuisine { background: rgba(0, 0, 0, .25); padding: .2rem .65rem; border-radius: 999px; font-size: .8rem; letter-spacing: .03em; }
+.card-body { padding: 1rem 1.1rem 1.2rem; display: flex; flex-direction: column; flex: 1; }
+.card-body h3 { font-size: 1.2rem; margin-bottom: .2rem; }
+.meta { color: var(--muted); font-size: .875rem; margin: 0 0 .5rem; }
+.desc { margin: 0 0 1rem; font-size: .95rem; flex: 1; }
+.card-cta { color: var(--wine); font-weight: 600; font-size: .9rem; }
+.card-cta::after { content: " →"; }
+
+/* Colour tones for banners, picked by restaurant id */
+.tone-0 { background: linear-gradient(135deg, #7a1f2b, #b5523b); }
+.tone-1 { background: linear-gradient(135deg, #1f4e5f, #3f8a8c); }
+.tone-2 { background: linear-gradient(135deg, #8a5a14, #c8963e); }
+.tone-3 { background: linear-gradient(135deg, #3d2c4f, #7a5a8c); }
+.tone-4 { background: linear-gradient(135deg, #2f5a2e, #6c9a4b); }
+.tone-5 { background: linear-gradient(135deg, #4a3a2e, #8c6a4f); }
+
+/* Restaurant page */
+.restaurant-hero { color: #fff; padding: 2.5rem 0; }
+.restaurant-hero h1 { font-size: 2.4rem; margin-bottom: .3rem; }
+.restaurant-hero p { margin: 0; opacity: .92; }
+.back { color: #fff; opacity: .85; text-decoration: none; font-size: .9rem; display: inline-block; margin-bottom: .8rem; }
+.two-col { display: grid; grid-template-columns: 1fr 380px; gap: 2.5rem; align-items: start; }
+.two-col h2:first-child { margin-top: 0; }
+.lead { font-size: 1.1rem; }
+.facts { display: grid; grid-template-columns: max-content 1fr; gap: .5rem 1.5rem; margin: 1.5rem 0; }
+.facts dt { font-weight: 600; color: var(--muted); }
+.facts dd { margin: 0; }
+.booking { position: sticky; top: 1rem; }
+@media (max-width: 820px) { .two-col { grid-template-columns: 1fr; } .booking { position: static; } }
+
+/* Forms and buttons */
+.card { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.4rem; }
+.stack { display: flex; flex-direction: column; gap: 1rem; }
+.row { display: flex; gap: 1rem; }
+.row > label { flex: 1; }
+label { display: flex; flex-direction: column; gap: .3rem; font-weight: 600; font-size: .9rem; }
+input, select, textarea { font: inherit; font-weight: 400; padding: .6rem .7rem; border: 1px solid #cfc4b8; border-radius: 8px; background: #fff; color: var(--ink); width: 100%; }
+input:focus, select:focus, textarea:focus { outline: 2px solid var(--gold); outline-offset: 1px; border-color: var(--gold); }
+button, .button { font: inherit; font-weight: 600; padding: .6rem 1.1rem; border: 1px solid var(--wine); border-radius: 8px; background: var(--wine); color: #fff; cursor: pointer; text-decoration: none; display: inline-block; text-align: center; }
+button:hover, .button:hover { background: var(--wine-dark); }
+.wide { width: 100%; }
+.secondary, .button.secondary { background: var(--paper); color: var(--wine); border-color: var(--line); }
+.secondary:hover, .button.secondary:hover { background: var(--cream); }
+.danger-outline { background: var(--paper); color: #a12a1d; border-color: #e3b9b3; }
+.danger-outline:hover { background: #fbeeec; }
+button.small { padding: .3rem .65rem; font-size: .85rem; }
+
+/* Alerts and badges */
+.alert { padding: .75rem 1rem; border-radius: 8px; }
+.alert.success { background: #e8f3e6; color: #2f5a2e; }
+.alert.error { background: #fbeae7; color: #8a2216; }
+.alert.info { background: #f5ecdc; color: #6b4a12; }
+.empty { background: var(--paper); border: 1px dashed var(--line); border-radius: var(--radius); padding: 1.25rem; color: var(--muted); }
+.badge { display: inline-block; padding: .15rem .6rem; border-radius: 999px; font-size: .8rem; font-weight: 600; }
+.badge-confirmed { background: #e8f3e6; color: #2f5a2e; }
+.badge-completed { background: #e6eef3; color: #1f4e5f; }
+.badge-cancelled { background: #f1ece7; color: var(--muted); }
+.badge-no_show { background: #fbeae7; color: #8a2216; }
+
+/* My reservations */
+.res-list { display: flex; flex-direction: column; gap: .9rem; }
+.res-card { display: flex; align-items: center; gap: 1.25rem; padding: 1rem 1.25rem; }
+.res-date { display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 64px; padding: .5rem; border-radius: 8px; background: var(--cream); border: 1px solid var(--line); }
+.res-month { text-transform: uppercase; font-size: .75rem; font-weight: 700; color: var(--wine); letter-spacing: .06em; }
+.res-day { font-family: Georgia, serif; font-size: 1.8rem; line-height: 1; }
+.res-info { flex: 1; }
+.res-info h3 { font-size: 1.15rem; margin-bottom: .15rem; }
+.res-info h3 a { text-decoration: none; color: var(--ink); }
+.res-info p { margin: 0; }
+
+/* Tables */
+table { width: 100%; border-collapse: collapse; background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+th, td { text-align: left; padding: .7rem .8rem; border-bottom: 1px solid var(--line); vertical-align: middle; }
+th { font-size: .8rem; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); background: #fcf9f5; }
+tr:last-child td { border-bottom: 0; }
+.row-muted td { color: var(--muted); }
+.table-wrap { overflow-x: auto; }
+
+/* Staff dashboard */
+.staff-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 1rem; }
+.eyebrow { text-transform: uppercase; letter-spacing: .08em; font-size: .8rem; font-weight: 700; color: var(--gold); margin: 0 0 .25rem; }
+.date-nav { display: flex; align-items: center; gap: .5rem; }
+.date-nav input { width: auto; }
+.stats { display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap; }
+.stat { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); padding: 1rem 1.4rem; min-width: 170px; display: flex; flex-direction: column; }
+.stat-value { font-family: Georgia, serif; font-size: 2rem; color: var(--wine); line-height: 1.1; }
+.stat-label { color: var(--muted); font-size: .875rem; }
+.status-form { display: flex; gap: .35rem; flex-wrap: wrap; }
+
+.footer { text-align: center; color: var(--muted); font-size: .85rem; padding: 1.5rem; border-top: 1px solid var(--line); background: var(--paper); }
+.footer p { margin: 0; }

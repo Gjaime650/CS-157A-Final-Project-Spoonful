@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('Find a table')}"></head>
+<body>
+<nav th:replace="~{fragments :: nav}"></nav>
+
+<header class="hero">
+    <div class="hero-inner">
+        <h1>Find a table tonight</h1>
+        <p>Browse local restaurants and reserve your spot in a few clicks.</p>
+        <form th:action="@{/}" method="get" class="search">
+            <input type="search" name="q" th:value="${q}" placeholder="Restaurant, cuisine or neighborhood"
+                   aria-label="Search restaurants">
+            <select name="cuisine" aria-label="Cuisine">
+                <option value="">All cuisines</option>
+                <option th:each="c : ${cuisines}" th:value="${c}" th:text="${c}" th:selected="${c == cuisine}">Italian</option>
+            </select>
+            <button type="submit">Search</button>
+        </form>
+    </div>
+</header>
+
+<main>
+    <div th:replace="~{fragments :: messages}"></div>
+
+    <div class="section-head">
+        <h2 th:text="${#strings.isEmpty(q) and #strings.isEmpty(cuisine)} ? 'All restaurants' : 'Search results'">All restaurants</h2>
+        <p class="muted" th:unless="${#strings.isEmpty(q) and #strings.isEmpty(cuisine)}">
+            <span th:text="${#lists.size(restaurants) == 1 ? '1 restaurant' : #lists.size(restaurants) + ' restaurants'}"></span>
+            · <a th:href="@{/}">Clear search</a>
+        </p>
+    </div>
+
+    <p class="empty" th:if="${#lists.isEmpty(restaurants)}">No restaurants match your search. Try another cuisine or neighborhood.</p>
+
+    <div class="grid">
+        <a class="restaurant-card" th:each="r : ${restaurants}" th:href="@{/restaurants/{id}(id=${r.get('id')})}">
+            <div class="card-banner" th:classappend="${'tone-' + (r.get('id') % 6)}">
+                <span class="banner-initial" th:text="${#strings.substring(r.get('name'), 0, 1)}">H</span>
+                <span class="banner-cuisine" th:text="${r.get('cuisine')}">Seafood</span>
+            </div>
+            <div class="card-body">
+                <h3 th:text="${r.get('name')}">Harbor &amp; Vine</h3>
+                <p class="meta">
+                    <span th:text="${r.get('priceRange')}">$$</span> ·
+                    <span th:text="${r.get('neighborhood')}">Downtown</span> ·
+                    <span th:text="${#temporals.format(r.get('opens'), 'h a') + '–' + #temporals.format(r.get('closes'), 'h a')}">5 PM–10 PM</span>
+                </p>
+                <p class="desc" th:text="${r.get('description')}">Description</p>
+                <span class="card-cta">Reserve a table</span>
+            </div>
+        </a>
+    </div>
+</main>
+<footer th:replace="~{fragments :: footer}"></footer>
+</body>
+</html>

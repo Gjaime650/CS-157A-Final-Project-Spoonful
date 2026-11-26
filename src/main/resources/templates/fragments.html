@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- Shared pieces. Pages pull them in with th:replace="~{fragments :: head('Title')}", "~{fragments :: nav}" and so on.
+     The app's name appears only in this file. -->
+<head th:fragment="head(title)">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${title} + ' | Spoonful'">Spoonful</title>
+    <link rel="stylesheet" th:href="@{/css/site.css}">
+</head>
+<body>
+<nav th:fragment="nav" class="nav">
+    <a class="brand" th:href="@{/}"><span class="brand-mark" aria-hidden="true">S</span>Spoonful</a>
+    <div class="links">
+        <a th:href="@{/}">Restaurants</a>
+        <th:block th:if="${role == 'CUSTOMER'}">
+            <a th:href="@{/reservations}">My reservations</a>
+            <a th:href="@{/profile}">Profile</a>
+            <a th:href="@{/payment-methods}">Payment</a>
+        </th:block>
+        <a th:if="${role == 'STAFF'}" th:href="@{/staff}">Dashboard</a>
+        <form th:if="${loggedIn}" th:action="@{/logout}" method="post" class="inline">
+            <button type="submit" class="link-button">Log out</button>
+        </form>
+        <th:block th:unless="${loggedIn}">
+            <a th:href="@{/login}">Log in</a>
+            <a class="nav-cta" th:href="@{/register}">Sign up</a>
+        </th:block>
+    </div>
+</nav>
+
+<div th:fragment="messages">
+    <p class="alert success" th:if="${message}" th:text="${message}"></p>
+    <p class="alert error" th:if="${error}" th:text="${error}"></p>
+</div>
+
+<!-- A coloured label for a reservation status, e.g. CONFIRMED shows as "Confirmed". -->
+<span th:fragment="status(s)" class="badge" th:classappend="${'badge-' + #strings.toLowerCase(s)}"
+      th:text="${s == 'NO_SHOW' ? 'No-show' : #strings.capitalize(#strings.toLowerCase(s))}">Confirmed</span>
+
+<footer th:fragment="footer" class="footer">
+    <p>Spoonful · CS 157A final project</p>
+</footer>
+</body>
+</html>

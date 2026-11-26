@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('Register your restaurant')}"></head>
+<body>
+<nav th:replace="~{fragments :: nav}"></nav>
+<main class="narrow">
+    <h1>Register your restaurant</h1>
+    <p class="muted">Create your staff account and restaurant profile. You can add your menu,
+        hours and payment methods once you're signed in.</p>
+    <div th:replace="~{fragments :: messages}"></div>
+    <form th:action="@{/register/restaurant}" method="post" class="card stack">
+
+        <fieldset class="stack">
+            <legend>Your account</legend>
+            <label>Your name <input type="text" name="name" maxlength="100"
+                                    th:value="${form?.get('name')}" required></label>
+            <label>Email <span class="optional">you'll use this to log in</span>
+                <input type="email" name="email" maxlength="255" th:value="${form?.get('email')}" required>
+            </label>
+            <label>Your phone <span class="optional">optional</span>
+                <input type="tel" name="phone" maxlength="20" th:value="${form?.get('phone')}">
+            </label>
+            <label>Password <input type="password" name="password" minlength="8" required></label>
+            <label>Confirm password <input type="password" name="confirmPassword" minlength="8" required></label>
+        </fieldset>
+
+        <fieldset class="stack">
+            <legend>Your restaurant</legend>
+            <label>Restaurant name <input type="text" name="restaurantName" maxlength="150"
+                                          th:value="${form?.get('restaurantName')}" required></label>
+            <label>Restaurant phone <span class="optional">shown to diners</span>
+                <input type="tel" name="restaurantPhone" maxlength="20" th:value="${form?.get('restaurantPhone')}">
+            </label>
+            <label>Street address <input type="text" name="street" maxlength="150"
+                                         th:value="${form?.get('street')}" required></label>
+            <label>City <input type="text" name="city" maxlength="100"
+                               th:value="${form?.get('city')}" required></label>
+            <label>State <input type="text" name="state" maxlength="50"
+                                th:value="${form?.get('state')}" required></label>
+            <label>ZIP code <input type="text" name="zipCode" maxlength="10" inputmode="numeric"
+                                   pattern="\d{5}(-\d{4})?" title="5 digits, or ZIP+4 like 90012-1234"
+                                   th:value="${form?.get('zipCode')}" required></label>
+            <label>Description <span class="optional">what diners should know about you</span>
+                <textarea name="description" rows="4" th:text="${form?.get('description')}"></textarea>
+            </label>
+            <label>Dining style <span class="optional">pick one or type your own</span>
+                <input type="text" name="diningStyle" maxlength="50" list="dining-styles"
+                       th:value="${form?.get('diningStyle')}">
+            </label>
+            <label>Dress code <span class="optional">pick one or type your own</span>
+                <input type="text" name="dressCode" maxlength="50" list="dress-codes"
+                       th:value="${form?.get('dressCode')}">
+            </label>
+        </fieldset>
+
+        <datalist id="dining-styles">
+            <option value="Casual Dining"></option>
+            <option value="Fine Dining"></option>
+            <option value="Fast Casual"></option>
+            <option value="Family Style"></option>
+            <option value="Bistro"></option>
+            <option value="Café"></option>
+        </datalist>
+        <datalist id="dress-codes">
+            <option value="Casual"></option>
+            <option value="Smart Casual"></option>
+            <option value="Business Casual"></option>
+            <option value="Business"></option>
+            <option value="Formal"></option>
+        </datalist>
+
+        <button type="submit" class="wide">Register restaurant</button>
+    </form>
+    <p>Booking a table instead? <a th:href="@{/register}">Sign up as a diner</a></p>
+    <p>Already have an account? <a th:href="@{/login}">Log in</a></p>
+</main>
+<footer th:replace="~{fragments :: footer}"></footer>
+</body>
+</html>

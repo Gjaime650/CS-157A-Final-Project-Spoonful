@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('Log in')}"></head>
+<body>
+<nav th:replace="~{fragments :: nav}"></nav>
+<main class="narrow">
+    <h1>Welcome back</h1>
+    <p class="muted">Log in to book tables and manage your reservations.</p>
+    <div th:replace="~{fragments :: messages}"></div>
+    <p class="alert info" th:if="${not #strings.isEmpty(demoLoginHint)}" th:text="${demoLoginHint}"></p>
+    <form th:action="@{/login}" method="post" class="card stack">
+        <input type="hidden" name="next" th:value="${next}">
+        <label>Email <input type="email" name="email" th:value="${email}" required autofocus></label>
+        <label>Password <input type="password" name="password" required></label>
+        <button type="submit" class="wide">Log in</button>
+    </form>
+    <p>New to Spoonful? <a th:href="@{/register}">Create an account</a></p>
+</main>
+<footer th:replace="~{fragments :: footer}"></footer>
+</body>
+</html>

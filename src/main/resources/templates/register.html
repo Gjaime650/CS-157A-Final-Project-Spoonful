@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('Sign up')}"></head>
+<body>
+<nav th:replace="~{fragments :: nav}"></nav>
+<main class="narrow">
+    <h1>Create your account</h1>
+    <p class="muted">Save your details once and book a table at any restaurant in seconds.</p>
+    <div th:replace="~{fragments :: messages}"></div>
+    <form th:action="@{/register}" method="post" class="card stack">
+        <label>Name <input type="text" name="name" maxlength="100" th:value="${form?.get('name')}" required></label>
+        <label>Email <input type="email" name="email" maxlength="255" th:value="${form?.get('email')}" required></label>
+        <label>Phone <span class="optional">so restaurants can reach you about a booking</span>
+            <input type="tel" name="phone" maxlength="20" th:value="${form?.get('phone')}">
+        </label>
+        <label>Special requests <span class="optional">dietary needs, accessibility, seating</span>
+            <input type="text" name="specialRequest" th:value="${form?.get('specialRequest')}">
+        </label>
+        <label>Password <input type="password" name="password" minlength="8" required></label>
+        <label>Confirm password <input type="password" name="confirmPassword" minlength="8" required></label>
+        <button type="submit" class="wide">Sign up</button>
+    </form>
+    <p>Own a restaurant? <a th:href="@{/register/restaurant}">Register your restaurant</a></p>
+    <p>Already have an account? <a th:href="@{/login}">Log in</a></p>
+</main>
+<footer th:replace="~{fragments :: footer}"></footer>
+</body>
+</html>
