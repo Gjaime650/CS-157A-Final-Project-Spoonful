@@ -23,7 +23,7 @@ public class AuthFormController {
 
     private static final String LOGIN_VIEW = "login";
     private static final String REGISTER_VIEW = "register";
-    private static final String RESTAURANT_VIEW = "Register Restaurant";
+    private static final String RESTAURANT_VIEW = "register-restaurant";
 
     private final AuthService authService;
 
